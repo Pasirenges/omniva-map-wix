@@ -4,15 +4,22 @@
   <meta charset="UTF-8">
   <title>Omniva paštomatų žemėlapis</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+
+  <!-- Omniva žemėlapio CSS -->
   <link rel="stylesheet" href="omniva-map.css">
+
   <style>
-    body {
+    html, body {
       margin: 0;
       padding: 0;
+      height: 100%;
     }
     #map {
       width: 100%;
-      height: 100vh;
+      height: 100%;
     }
   </style>
 </head>
@@ -20,11 +27,21 @@
 
   <div id="map"></div>
 
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+
+  <!-- Omniva JS -->
   <script src="omniva-map.min.js"></script>
+
   <script>
+    // Inicijuojam žemėlapį
     OmnivaMap.init({
       country: 'LT',
       onSelect: function(terminal) {
+        // Perduodam pasirinktą terminalą į išorinę sistemą (Wix per iframe postMessage)
         window.parent.postMessage({
           type: 'omniva-selected',
           terminal: terminal
